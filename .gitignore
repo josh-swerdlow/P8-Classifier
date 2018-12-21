@@ -1,5 +1,10 @@
 # Git Ignore File
 
+# Extra Stuff
+__pycache__
+.DS_Store
+.git
+
 # Auxillary Files
 *.json
 
