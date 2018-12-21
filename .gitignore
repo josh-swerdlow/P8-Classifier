@@ -1,0 +1,9 @@
+# Git Ignore File
+
+# Auxillary Files
+*.json
+
+# Backup and Test Files
+Test/
+test.*
+*.bak
