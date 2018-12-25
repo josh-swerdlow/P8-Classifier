@@ -20,7 +20,7 @@ RECV_DIR=${1}
 
 # If the local directory doesn't exit use the default
 if [[ ! -d  "${RECV_DIR}" ]]; then
-    RECV_DIR="~/Documents/College/Senior_Year/First_Semester/thesis/classifier/data/pitch_angles"
+    RECV_DIR="~/Documents/College/Senior_Year/thesis/classifier/data/pitch_angles"
 fi
 
 # Construct the remote pitch file path

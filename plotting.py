@@ -50,7 +50,7 @@ def start_time_hist(data, binwidth=0.025e-3, filtered=False, save_dir=None, show
     # S E T T T I N G S
     plt.xlabel('Start Time [S]')
     plt.ylabel('Counts')
-    plt.ylim((0,20))
+    plt.ylim((0,55))
     plt.title(title)
     plt.grid()
 
@@ -92,7 +92,7 @@ def start_freq_hist(data, binwidth=0.1, filtered=False, save_dir=None, show=Fals
     # S E T T T I N G S
     plt.title(title)
     plt.ylabel("Counts")
-    plt.ylim((0,20))
+    # plt.ylim((0,20))
     plt.xlabel("Frequency [MHz]")
     plt.grid()
 
@@ -129,7 +129,7 @@ def start_freq_v_slope(data, filtered=False, save_dir=None, show=False):
         slopes += list(data[seed][group][dataset][slope])
 
     # Plot in range 1049.5 to 1053 MHz on x-axis and 0.2 to 0.95 MHz/ms on y-axis.
-    plt.figure('Start Freq v Slope')
+    plt.figure('Slope v Start Frequency')
     plt.scatter(startFreqs, slopes, facecolors='none', edgecolors='b', alpha=0.5,)
 
     plt.title(title)
@@ -137,8 +137,7 @@ def start_freq_v_slope(data, filtered=False, save_dir=None, show=False):
     plt.ylabel("Slope [MHz/ms]")
     plt.grid()
     plt.xlim((105,118))
-    # plt.xlim((1049.5, 1053))
-    # plt.ylim(0.2, 0.95)
+    plt.ylim((0,1.5e9))
 
     if save_dir is not None:
         if os.path.isdir(save_dir):
@@ -153,7 +152,7 @@ def power_v_slope(data, filtered=False, save_dir=None, show=False):
     s_to_ms = 1e3 # seconds to milliseconds
     hzPs_to_MHzPms = 1e-9 # hz/s to MHz/ms
 
-    title = "Slope vs Start Frequency"
+    title = "Track Power vs Slope"
 
     group = 'candidate_tracks'
     dataset = 'candidate_tracks_0'
@@ -168,12 +167,12 @@ def power_v_slope(data, filtered=False, save_dir=None, show=False):
     slopes = list()
     seeds = data.keys()
     for seed in seeds:
-        power += list(data[seed][group][dataset][totPower])
+        power += list(data[seed][group][dataset][totPower] * 1e-1)
         slopes += list(data[seed][group][dataset][slope])
 
     # Plot in range 1049.5 to 1053 MHz on x-axis and 0.2 to 0.95 MHz/ms on y-axis.
     plt.figure('Power v Slope')
-    plt.scatter(slopes, power, facecolors='none', edgecolors='b', alpha=0.5,)
+    plt.scatter(slopes, power, facecolors='none', edgecolors='b', alpha=0.5)
 
     plt.title(title)
     plt.xlabel("Slope [Hz/s]")
@@ -181,7 +180,7 @@ def power_v_slope(data, filtered=False, save_dir=None, show=False):
     plt.grid()
 
     plt.xlim((200e6, 800e6))
-    plt.ylim((0, 50e-18))
+    plt.ylim((0, 50e-21))
 
     if save_dir is not None:
         if os.path.isdir(save_dir):
@@ -249,10 +248,10 @@ if __name__ == "__main__":
     # Process all the data in default directories
     seeds, files, data = process_files()
     save_dir = "./figures/test_properties/"
-    # start_time_hist(data, save_dir=save_dir)
-    # start_freq_hist(data, save_dir=save_dir)
-    # start_freq_v_slope(data, save_dir=save_dir)
-    power_v_slope(data, show=True)
+    start_time_hist(data, save_dir=save_dir)
+    start_freq_hist(data, binwidth=0.5, save_dir=save_dir)
+    start_freq_v_slope(data, save_dir=save_dir)
+    power_v_slope(data, save_dir=save_dir)
 
 
     # Run through the files and construct the necessary plots

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Usage: ./process.sh <seed_val0> <seed_val1> ... <seed_valn>
+
+if [[ ${1} = "help" ]]; then
+    echo "Usage: ./process.sh <seed_val0> <seed_val1> ... <seed_valn>"
+    echo "seed_val: A seed value to process"
+    echo "Processes all egg files for the given seeds using Katydid and copy the initial pitch angles."
+    exit 0
+fi
+
 katydid=/cmn/p8/katydid/cbuild/bin/Katydid
 config=/home/jswerdlow/classifier/simulation_phase1_classify.yaml # Point to your config file
 

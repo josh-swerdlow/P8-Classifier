@@ -7,8 +7,12 @@ __pycache__
 
 # Auxillary Files
 *.json
+*.yaml
 
 # Backup and Test Files
 Test/
 test.*
 *.bak
+
+# Possibly Private to P8
+data/*
